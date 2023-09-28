@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/privacy-policy', function () {
+    return view('privacy_policy');
+});
+Route::get('/term-of-service', function () {
+    return view('term_of_service');
+});
 Route::get('/auth/google', [AuthController::class, 'redirectToProvider']);
 Route::get('/auth/google/callback', [AuthController::class, 'handleProviderCallback']);
 Route::get('/auth/google/logout', [AuthController::class, 'handleLogout']);
