@@ -68,7 +68,7 @@
                                         @error('file')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <button wire:loading.attr='disabled' wire:click='upload'
+                                        <button type="button" wire:loading.attr='disabled' wire:click='uploadFile'
                                             class="btn btn-success">Unggah Sekarang <span wire:loading
                                                 class="spinner-border spinner-border-sm " role="status"
                                                 aria-hidden="true"
