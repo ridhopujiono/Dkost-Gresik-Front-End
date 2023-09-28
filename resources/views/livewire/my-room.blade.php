@@ -11,8 +11,8 @@
         </div>
         <div class="container">
             <div class="row w-100">
-                <div class="col-md-3 mb-2">
-                    @forelse ($rooms as $room)
+                @forelse ($rooms as $room)
+                    <div class="col-md-3 mb-2">
                         <a wire:navigate href="{{ url('dash/room') . '/' . $room['id'] . '/' . $room['room_id'] }}">
                             <div class="card text-start">
                                 <div class="d-flex position-absolute ms-2">
@@ -35,11 +35,11 @@
                                 </div>
                             </div>
                         </a>
-                    @empty
-                        <div class="alert alert-secondary">Belum ada kamar yang diterima</div>
-                    @endforelse
 
-                </div>
+                    </div>
+                @empty
+                    <div class="alert alert-secondary">Belum ada kamar yang diterima</div>
+                @endforelse
             </div>
         </div>
     </div>
