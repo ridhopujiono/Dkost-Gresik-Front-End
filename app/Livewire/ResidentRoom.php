@@ -46,7 +46,7 @@ class ResidentRoom extends Component
         $this->contact_number = $this->residentDetails['emergency_info']["contact_number"];
     }
 
-    public function upload()
+    public function uploadFile()
     {
         $validate = $this->validate([
             'file' => 'required|image|max:2048'
