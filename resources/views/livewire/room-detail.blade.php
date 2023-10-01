@@ -33,7 +33,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                {{ session('error') }}
+                @if (session('error') == 'Maaf email anda belum terverifikasi')
+                    Maaf email anda belum terverifikasi. <a wire:navigate href="{{ url('email/verify') }}">Tekan
+                        disini</a>
+                @else
+                    {{ session('error') }}
+                @endif
             </div>
         </div>
     @endif

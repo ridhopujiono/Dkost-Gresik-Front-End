@@ -6,11 +6,24 @@
         .form-floating>.form-control:not(:placeholder-shown)~label::after,
         .form-floating>.form-select~label::after {
             background: #eee !important;
+            margin-bottom: 5px;
+        }
+
+        .form-floating>.form-control-plaintext:focus,
+        .form-floating>.form-control-plaintext:not(:placeholder-shown),
+        .form-floating>.form-control:focus,
+        .form-floating>.form-control:not(:placeholder-shown) {
+            padding-top: 1.825rem;
         }
 
         .form-floating>label {
             display: flex;
             align-items: center
+        }
+
+        .form-control {
+            background: #eee;
+            border: 1px solid #dcdcdc;
         }
 
         /* Media query untuk layar Android dengan lebar kurang dari 768px (misalnya, ponsel) */
@@ -28,7 +41,11 @@
                         alt="">
                 </div>
                 <div class="col-md">
-                    @livewire('auth.login-form')
+                    <h1>Buat Akun</h1>
+                    <p>Hai, Silahkan lengkapi formulir pendaftaran!.</p>
+
+                    @livewire('auth.register-form')
+
                 </div>
             </div>
         </div>

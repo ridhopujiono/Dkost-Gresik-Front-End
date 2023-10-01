@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite; //tambahkan library socialite
 use App\Models\User; //tambahkan model user
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // Goole Login
     public function redirectToProvider()
     {
         return Socialite::driver('google')->stateless()->redirect();
@@ -43,10 +45,26 @@ class AuthController extends Controller
             return redirect('/')->with('error', 'Gagal login. Error: ' . $e->getMessage());
         }
     }
-    public function handleLogout()
+
+    // Manual Login
+    public function auth()
+    {
+        return view('welcome');
+    }
+    public function register()
+    {
+        return view('register');
+    }
+
+
+    public function handleLogout(Request $request): RedirectResponse
     {
         Auth::logout();
 
-        return redirect('/')->with('success', 'Berhasil keluar');
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
