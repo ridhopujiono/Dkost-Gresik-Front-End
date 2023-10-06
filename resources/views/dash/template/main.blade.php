@@ -20,8 +20,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
         <!-- Meta -->
-        <meta name="description" content="Responsive Bootstrap 4 Dashboard Template" />
-        <meta name="author" content="BootstrapDash" />
+        <meta name="description" content="Rumah Sidqia Dashboard" />
+        <meta name="author" content="Rumah Sidqia" />
 
         <title>{{ $title }}</title>
 
@@ -34,6 +34,7 @@
         @livewireStyles
         <link data-navigate-once href="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.css"
             rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico') }}">
 
     </head>
 
@@ -50,7 +51,7 @@
         <div class="az-header">
             <div class="container">
                 <div class="az-header-left">
-                    <a wire:navigate href="{{ url('/') }}" class="az-logo"><span></span> <img width="170px"
+                    <a wire:navigate href="{{ url('/') }}" class="az-logo"><span></span> <img height="50px"
                             src="{{ asset('logo.png') }}" alt=""></a>
                     <a wire:navigate href="" id="azMenuShow"
                         class="az-header-menu-icon d-lg-none"><span></span></a>

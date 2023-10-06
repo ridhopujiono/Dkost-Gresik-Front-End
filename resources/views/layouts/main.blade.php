@@ -2,15 +2,15 @@
 <html lang="en">
 
     <head>
-        <title>Dkost Gresik</title>
+        <title>Rumah Sidqia</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="format-detection" content="telephone=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="author" content="">
-        <meta name="keywords" content="Dkost Gresik">
-        <meta name="description" content="Dkost Gresik">
+        <meta name="author" content="Rumah Sidqia">
+        <meta name="keywords" content="Rumah Sidqia">
+        <meta name="description" content="Rumah Sidqia adalah website kost kostan dengan pilihan kamar yang menarik">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -25,6 +25,7 @@
             rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
             integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico') }}">
 
         @livewireStyles
     </head>
@@ -107,7 +108,7 @@
         <script data-navigate-once src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         @stack('script')
 
-        
+
         <script>
             $(document).ready(function() {
                 var loginBtn = $("#loginBtn");
