@@ -19,14 +19,13 @@
                                     <span
                                         class="btn {{ $room['payment_status'] == 'lunas' ? 'btn-success' : 'btn-danger' }} mt-2 text-capitalize">{{ $room['payment_status'] == 'lunas' ? 'Lunas' : 'Belum Lunas' }}</span>
                                 </div>
-                                <img src="https://res.cloudinary.com/dfy3gxotz/image/upload/v1695148173/compressed_images/rurzsk8qcbrlz6nfpeon.jpg"
-                                    alt=""
+                                <img src="{{ $room['room']['room_images'][0]['image'] }}" alt=""
                                     style="
-                      width: 100%;
-                      height: 200px;
-                      object-fit: cover;
-                      border-radius: 5px;
-                    "
+                                            width: 100%;
+                                            height: 200px;
+                                            object-fit: cover;
+                                            border-radius: 5px;
+                                            "
                                     class="card-image" />
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title m- mb-1">{{ $room['room']['room_name'] }}</h5>

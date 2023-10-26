@@ -40,10 +40,10 @@
                                     class="badge bg-secondary text-dark me-1 mt-2 text-capitalize">{{ $room['room_type'] }}</span>
                             </div>
                             <figure>
-                                <a href="{{ url('room') }}/{{ $room['id'] }}" title="Product Title" wire:navigate>
+                                <a href="{{ url('room') }}/{{ $room['id'] }}" wire:navigate>
                                     <img src="{{ isset($room['room_images'][0]['image']) ? $room['room_images'][0]['image'] : 'https://placehold.co/500x250' }}"
                                         class="tab-image"
-                                        style="width: 100%;height: 200px;object-fit: cover; border-radius: 5px">
+                                        style="width: 100%;height: 250px;object-fit: cover; border-radius: 5px">
                                 </a>
                             </figure>
                             <div class="d-flex justify-content-between flex-row mb-1">
@@ -62,8 +62,7 @@
                                     @if ($room['stock'] == 0)
                                         <div class="badge" style="background: red; color: #fff">Penuh</div>
                                     @else
-                                        <span
-                                            class="qty"style="
+                                        <span class="qty"style="
                                         text-transform: capitalize;
                                         text-overflow: ellipsis;
                                         overflow: hidden;

@@ -47,20 +47,30 @@
             .fc .fc-daygrid-day.fc-day-today {
                 background-color: rgb(111 66 193 / 25%);
             }
+
+            .sidqia-logo {
+                width: 170px
+            }
+
+            @media only screen and (max-width: 768px) {
+                .sidqia-logo {
+                    margin-top: 10px;
+                    width: 70px
+                }
+            }
         </style>
         <div class="az-header">
             <div class="container">
                 <div class="az-header-left">
-                    <a wire:navigate href="{{ url('/') }}" class="az-logo"><span></span> <img height="50px"
-                            src="{{ asset('logo.png') }}" alt=""></a>
-                    <a wire:navigate href="" id="azMenuShow"
-                        class="az-header-menu-icon d-lg-none"><span></span></a>
+                    <a class="az-logo"><span></span> <img height="50px" src="{{ asset('logo.png') }}"
+                            alt=""></a>
+                    <a id="azMenuShow" class="az-header-menu-icon d-lg-none"><span></span></a>
                 </div>
                 <!-- az-header-left -->
                 <div class="az-header-menu">
                     <div class="az-header-menu-header">
-                        <a wire:navigate href="{{ url('dash') }}" class="az-logo"><span></span> <img width="170px"
-                                src="{{ asset('logo.png') }}" alt=""></a>
+                        <a wire:navigate href="{{ url('/') }}" class="az-logo"><span></span> <img
+                                class="sidqia-logo" src="{{ asset('logo.png') }}" alt=""></a>
                         <a wire:navigate href="" class="close">&times;</a>
                     </div>
                     <!-- az-header-menu-header -->
@@ -101,10 +111,13 @@
                                 <span class='text-capitalize'>{{ auth()->user()->level }}</span>
                             </div>
                             <!-- az-header-profile -->
-
+                            <a href="{{ url('/') }}" class="dropdown-item"
+                                style="display: flex;justify-content: center;border-top: 1px solid #eee;"><i
+                                    class="typcn typcn-home"></i> Halaman Awal</a>
                             <a href="{{ url('auth/google/logout') }}" class="dropdown-item"
                                 style="display: flex;justify-content: center;border-top: 1px solid #eee;"><i
                                     class="typcn typcn-power-outline"></i> Logout</a>
+
                         </div>
                         <!-- dropdown-menu -->
                     </div>

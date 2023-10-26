@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('container')
-    <section class="py-3"
+    {{-- <section class="py-3"
         style="background-image: url({{ asset('themes/images/background-pattern.jpg') }};background-repeat: no-repeat;background-size: cover;">
         <div class="container-fluid">
             <div class="row">
@@ -105,7 +105,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="py-5">
         <div class="container-fluid">

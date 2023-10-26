@@ -31,7 +31,7 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleProviderCallb
 Route::get('/auth/google/logout', [AuthController::class, 'handleLogout']);
 
 // Manual Login
-Route::get('/auth', [AuthController::class, 'auth']);
+Route::get('/auth', [AuthController::class, 'auth'])->name('login');
 Route::get('/register', [AuthController::class, 'register']);
 
 Route::controller(VerificationController::class)->group(function () {
@@ -48,24 +48,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['verified']], function () {
         Route::get('/dash', function () {
             return view('dash.index', [
-                'title' => 'Dkost Gresik | Dashboard'
+                'title' => 'Rumah Sidqia | Dashboard'
             ]);
         });
         Route::get('/dash/notification', function () {
             return view('dash.notification', [
-                'title' => 'Dkost Gresik | Notifikasi'
+                'title' => 'Rumah Sidqia | Notifikasi'
             ]);
         });
         Route::get('/dash/room', function () {
             return view('dash.room', [
-                'title' => 'Dkost Gresik | Kamar Saya'
+                'title' => 'Rumah Sidqia | Kamar Saya'
             ]);
         });
         Route::get('/dash/room/{resident_id}/{room_id}', function ($resident_id, $room_id) {
             return view('dash.detail', [
                 'resident_id' => $resident_id,
                 'room_id' => $room_id,
-                'title' => 'Dkost Gresik | Detail Kamar Saya'
+                'title' => 'Rumah Sidqia | Detail Kamar Saya'
             ]);
         });
     });

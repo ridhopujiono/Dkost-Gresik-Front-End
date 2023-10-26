@@ -25,7 +25,7 @@
                         <div class="alert alert-danger {{ $residentProfileComplete ? 'd-none' : '' }}">Mohon lengkapi
                             data diri terlebih
                             dahulu, supaya mendapat
-                            terverifikasi saat melakukan pelunasan
+                            terverifikasi saat melakukan pelunasan. Abaikan bila sudah terlengkapi
                         </div>
                     @endif
                 </div>
@@ -62,6 +62,11 @@
                                         @if (session('success'))
                                             <div class="alert alert-success">Bukti Pembayaran Berhasil Diunggah</div>
                                         @endif
+                                        <div class="alert alert-warning">
+                                            Pembayaran uang sewa kost dilakukan melalui transfer ke rekening pemilik
+                                            rumah Kost di <b>Bank Mandiri (1780002818074)</b> atau di <b>Bank BSI
+                                                (4297640280) an. Mia Fathia</b>
+                                        </div>
                                         <div class="form-group">
                                             <input type="file" wire:model='file' class="form-control">
                                         </div>
@@ -156,40 +161,51 @@
                             id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="row mt-3">
                                 <div class="col">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="card">
                                         <div class="card-body">
-                                            <form wire:submit.prevent="save">
+                                            <form wire:submit.prevent="save" enctype="multipart/form-data">
                                                 <div class="form-group mb-3">
                                                     <label for="name" class="form-label">Nama Penghuni</label>
-                                                    <input wire:model='name' type="text"
+                                                    <input wire:model="name" type="text"
                                                         class="form-control @error('name') is-invalid @enderror"
                                                         name="name" value="{{ $name }}" />
                                                     @error('name')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group mb-3">
                                                     <label for="address" class="form-label">Alamat</label>
-                                                    <textarea wire:model='address' type="text" class="form-control @error('address') is-invalid @enderror"
-                                                        name="address" value="{{ $address }}">{{ $address }}</textarea>
+                                                    <textarea wire:model="address" class="form-control @error('address') is-invalid @enderror" name="address">{{ $address }}</textarea>
                                                     @error('address')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group mb-3">
                                                     <label for="contact" class="form-label">Kontak Penghuni</label>
-                                                    <input wire:model='contact' type="text"
+                                                    <input wire:model="contact" type="text"
                                                         class="form-control @error('contact') is-invalid @enderror"
                                                         name="contact" value="{{ $contact }}" />
                                                     @error('contact')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+
                                                 <div class="form-group mb-3">
                                                     <label for="contact_name" class="form-label">Nomor Darurat</label>
                                                     <div class="d-flex gap-2">
                                                         <div style='width: 50%'>
-                                                            <input wire:model='contact_name' type="text"
+                                                            <input wire:model="contact_name" type="text"
                                                                 class="form-control @error('contact_name') is-invalid @enderror"
                                                                 name="contact_name" value="{{ $contact_name }}"
                                                                 placeholder="Nama Nomor Darurat. Contoh: Ibu, Ayah" />
@@ -198,7 +214,7 @@
                                                             @enderror
                                                         </div>
                                                         <div style='width: 50%'>
-                                                            <input wire:model='contact_number' type="text"
+                                                            <input wire:model="contact_number" type="text"
                                                                 class="form-control @error('contact_number') is-invalid @enderror"
                                                                 name="contact_number" value="{{ $contact_number }}"
                                                                 placeholder="Nomor Darurat" />
@@ -208,13 +224,91 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <button type="submit" class="btn btn-success"
-                                                        wire:loading.attr='disabled' wire:.loading.delay.longest>Simpan
-                                                        <span class="bx bx-save"></span>
-                                                    </button>
+
+                                                <!-- Kolom-kolom baru -->
+
+                                                <div class="form-group mb-3">
+                                                    <label for="ktp_number" class="form-label">Nomor KTP</label>
+                                                    <input wire:model="ktp_number" type="text"
+                                                        class="form-control @error('ktp_number') is-invalid @enderror"
+                                                        name="ktp_number" value="{{ $ktp_number }}" />
+                                                    @error('ktp_number')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
+
+                                                @if ($ktp_image == null)
+                                                    <div class="form-group mb-3">
+                                                        <label for="ktp_image" class="form-label">Foto KTP</label>
+                                                        <input wire:model="ktp_image" type="file"
+                                                            class="form-control-file @error('ktp_image') is-invalid @enderror"
+                                                            name="ktp_image" />
+                                                        @error('ktp_image')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                @endif
+                                                <div class="form-group mb-3">
+                                                    <label for="job" class="form-label">Pekerjaan</label>
+                                                    <select wire:model="job"
+                                                        class="form-control @error('job') is-invalid @enderror"
+                                                        name="job">
+                                                        <option value="">Pilih Pekerjaan</option>
+                                                        <option value="karyawan">Karyawan</option>
+                                                        <option value="pelajar">Pelajar</option>
+                                                    </select>
+                                                    @error('job')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label for="institute" class="form-label">Institusi</label>
+                                                    <input wire:model="institute" type="text"
+                                                        class="form-control @error('institute') is-invalid @enderror"
+                                                        name="institute" value="{{ $institute }}" />
+                                                    @error('institute')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label for="institute" class="form-label">Alamat Institusi</label>
+                                                    <textarea wire:model="institute_address" type="text"
+                                                        class="form-control @error('institute_address') is-invalid @enderror" name="institute_address"
+                                                        value="{{ $institute_address }}">{{ $institute_address }}</textarea>
+                                                    @error('institute')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="vehicle" class="form-label">Kendaraan</label>
+                                                    <select wire:model="vehicle"
+                                                        class="form-control @error('vehicle') is-invalid @enderror"
+                                                        name="vehicle">
+                                                        <option value="">Pilih Kendaraan</option>
+                                                        <option value="tidak_ada">Tidak ada kendaraan</option>
+                                                        <option value="mobil">Mobil</option>
+                                                        <option value="motor">Motor</option>
+                                                    </select>
+                                                    @error('vehicle')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label for="vehicle_number" class="form-label">Nomor
+                                                        Kendaraan</label>
+                                                    <input wire:model="vehicle_number" type="text"
+                                                        class="form-control @error('vehicle_number') is-invalid @enderror"
+                                                        name="vehicle_number" value="{{ $vehicle_number }}" />
+                                                    @error('vehicle_number')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                                <button class="btn btn-success">Simpan</button>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>

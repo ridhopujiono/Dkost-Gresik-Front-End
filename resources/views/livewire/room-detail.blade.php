@@ -151,7 +151,9 @@
                                                         class="btn btn-dark shadow-lg py-2"
                                                         style="border-radius: 20px">Ajukan Sewa</button>
                                                 @endif
-                                                <a href="#map" class="btn btn-light text-dark shadow-lg py-2"
+                                                <a target="_blank"
+                                                    href="https://www.google.com/maps/search/?api=1&query={{ $room['location']['latitude'] }}%2C{{ $room['location']['longitude'] }}"
+                                                    class="btn btn-light text-dark shadow-lg py-2"
                                                     style="border-radius: 20px">Lokasi <img width="24"
                                                         height="24"
                                                         src="https://img.icons8.com/color/48/google-maps-new.png"
@@ -218,7 +220,7 @@
                 var marker = L.marker(val, {
                     icon: markerIcon
                 });
-                layerGroup.addLayer(marker);
+                layerGroup.addLayer(marker).on('click');
                 map.addLayer(layerGroup);
 
                 // Mendapatkan elemen input dengan id "latitudeInput"
