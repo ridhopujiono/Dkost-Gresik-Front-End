@@ -231,18 +231,15 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-
-                                                @if ($ktp_image == null)
-                                                    <div class="form-group mb-3">
-                                                        <label for="ktp_image" class="form-label">Foto KTP</label>
-                                                        <input wire:model="ktp_image" type="file"
-                                                            class="form-control-file @error('ktp_image') is-invalid @enderror"
-                                                            name="ktp_image" />
-                                                        @error('ktp_image')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                @endif
+                                                <div class="form-group mb-3">
+                                                    <label for="ktp_image" class="form-label">Foto KTP</label>
+                                                    <input wire:model="ktp_image" type="file"
+                                                        class="form-control-file @error('ktp_image') is-invalid @enderror"
+                                                        name="ktp_image" />
+                                                    @error('ktp_image')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                                 <div class="form-group mb-3">
                                                     <label for="job" class="form-label">Pekerjaan</label>
                                                     <select wire:model="job"
