@@ -19,7 +19,8 @@
                                     <span
                                         class="btn {{ $room['payment_status'] == 'lunas' ? 'btn-success' : 'btn-danger' }} mt-2 text-capitalize">{{ $room['payment_status'] == 'lunas' ? 'Lunas' : 'Belum Lunas' }}</span>
                                 </div>
-                                <img src="{{ $room['room']['room_images'][0]['image'] }}" alt=""
+                                <img src="{{ isset($room['room']['room_images'][0]['image']) ? $room['room_images'][0]['image'] : 'https://placehold.co/500x250' }}"
+                                    alt=""
                                     style="
                                             width: 100%;
                                             height: 200px;
