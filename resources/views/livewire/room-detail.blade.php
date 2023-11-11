@@ -136,11 +136,11 @@
                                                 </div>
                                             </div>
 
-                                            @if ($room['stock'] == 0)
+                                            @if ($room['is_reserved'])
                                                 <div class="alert alert-danger p-2 mt-3">Kamar sudah penuh</div>
                                             @endif
-                                            <div class="d-flex gap-3 {{ $room['stock'] != 0 ? 'mt-4' : '' }}">
-                                                @if ($room['stock'] == 0)
+                                            <div class="d-flex gap-3 {{ !$room['is_reserved'] ? 'mt-4' : '' }}">
+                                                @if ($room['is_reserved'])
                                                     <button wire:click='reservation("full_booked")'
                                                         class="btn btn-dark text-white shadow-lg py-2"
                                                         style="border-radius: 20px">Hubungi

@@ -58,19 +58,10 @@
                                         href="{{ url('room') }}/{{ $room['id'] }}"
                                         wire:navigate>{{ $room['room_name'] }}</a></span>
 
-                                @if ($room['stock'] < 3)
-                                    @if ($room['stock'] == 0)
-                                        <div class="badge" style="background: red; color: #fff">Penuh</div>
-                                    @else
-                                        <span class="qty"style="
-                                        text-transform: capitalize;
-                                        text-overflow: ellipsis;
-                                        overflow: hidden;
-                                        color: #d01d1d;
-                                        font-style: italic;
-                                    ">Sisa
-                                            {{ $room['stock'] }} kamar</span>
-                                    @endif
+                                @if ($room['is_reserved'])
+                                    <span style="font-size: 11px; color: red" class="fw-semibold">Penuh</span>
+                                @else
+                                    <span class="text-success" style="font-size: 11px">Tersedia</span>
                                 @endif
                             </div>
                             <h3
@@ -128,11 +119,8 @@
                 @endif
 
             </div>
-            <!-- / product-grid -->
 
         </div>
 
     </div>
-
-    </script>
 </div>

@@ -117,16 +117,6 @@
                                                 <input disabled type="text" class="form-control" name="price"
                                                     value="Rp. {{ number_format($roomDetails['price'], '2') }}" />
                                             </div>
-                                            <div class="form-group mb-3">
-                                                <label for="stock" class="form-label">Jumlah Kamar Tersedia</label>
-                                                <input disabled type="text" class="form-control" name="stock"
-                                                    value="{{ $roomDetails['stock'] }}" />
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label id="room_type" class="form-label">Pilih Status Kamar</label>
-                                                <input disabled type="text" class="form-control"
-                                                    name="room_status" value="{{ $roomDetails['room_status'] }}" />
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +159,11 @@
                                                 @endforeach
                                             </ul>
                                         </div>
+                                    @endif
+                                    @if (session('success'))
+                                        <div class="alert alert-success">{{ session('success') }}</div>
+                                    @elseif(session('error'))
+                                        <div class="alert alert-danger">{{ session('error') }}</div>
                                     @endif
                                     <div class="card">
                                         <div class="card-body">

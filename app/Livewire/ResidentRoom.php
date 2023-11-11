@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -95,7 +96,7 @@ class ResidentRoom extends Component
             'institute' => 'required|min:2|max:100',
             'institute_address' => 'required|min:2|max:200',
             'vehicle' => 'required|min:2|max:10',
-            'vehicle_number' => 'required|min:2|max:10',
+            'vehicle_number' => 'nullable',
         ]);
         $validate['emergency_info'] = [
             "contact_name" => $this->contact_name,
@@ -103,62 +104,67 @@ class ResidentRoom extends Component
         ];
 
         try {
-            // dd($this->ktp_image);
+            $body = [];
+            $body = [
+                [
+                    'name' => 'name',
+                    'contents' => $validate['name']
+                ],
+                [
+                    'name' => 'address',
+                    'contents' => $validate['address']
+                ],
+                [
+                    'name' => 'contact',
+                    'contents' => $validate['contact']
+                ],
+                [
+                    'name' => 'ktp_number',
+                    'contents' => $validate['ktp_number']
+                ],
+                [
+                    'name' => 'job',
+                    'contents' => $validate['job']
+                ],
+                [
+                    'name' => 'institute',
+                    'contents' => $validate['institute']
+                ],
+                [
+                    'name' => 'institute_address',
+                    'contents' => $validate['institute_address']
+                ],
+                [
+                    'name' => 'vehicle',
+                    'contents' => $validate['vehicle']
+                ],
+                [
+                    'name' => 'vehicle_number',
+                    'contents' => $validate['vehicle_number']
+                ],
+                [
+                    'name' => 'contact_name',
+                    'contents' => $this->contact_name
+                ],
+                [
+                    'name' => 'contact_number',
+                    'contents' => $this->contact_number
+                ]
+            ];
+
+            if (File::isFile($this->ktp_image)) {
+                array_push($body, [
+                    'name' => 'ktp_image',
+                    'contents' =>
+                    file_get_contents($this->ktp_image->getRealPath()),
+                    'filename' => rand(1, 100) . "_" . Carbon::now(),
+                    'Mime-Types' => $this->ktp_image->getMimeType('image')
+                ]);
+            }
+
             $client = new \GuzzleHttp\Client();
             $resident = $client->request('POST',  env('APP_URL_API') . "/resident/profile/" . $this->resident_id, [
-                'multipart' => [
-                    [
-                        'name' => 'ktp_image',
-                        'contents' =>
-                        file_get_contents($this->ktp_image->getRealPath()),
-                        'filename' => rand(1, 100) . "_" . Carbon::now(),
-                        'Mime-Types' => $this->ktp_image->getMimeType('image')
-                    ],
-                    [
-                        'name' => 'name',
-                        'contents' => $validate['name']
-                    ],
-                    [
-                        'name' => 'address',
-                        'contents' => $validate['address']
-                    ],
-                    [
-                        'name' => 'contact',
-                        'contents' => $validate['contact']
-                    ],
-                    [
-                        'name' => 'ktp_number',
-                        'contents' => $validate['ktp_number']
-                    ],
-                    [
-                        'name' => 'job',
-                        'contents' => $validate['job']
-                    ],
-                    [
-                        'name' => 'institute',
-                        'contents' => $validate['institute']
-                    ],
-                    [
-                        'name' => 'institute_address',
-                        'contents' => $validate['institute_address']
-                    ],
-                    [
-                        'name' => 'vehicle',
-                        'contents' => $validate['vehicle']
-                    ],
-                    [
-                        'name' => 'vehicle_number',
-                        'contents' => $validate['vehicle_number']
-                    ],
-                    [
-                        'name' => 'contact_name',
-                        'contents' => $this->contact_name
-                    ],
-                    [
-                        'name' => 'contact_number',
-                        'contents' => $this->contact_number
-                    ],
-                ]
+                'multipart' => $body
             ]);
 
             if ($resident) {
